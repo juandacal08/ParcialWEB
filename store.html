@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - Videojuegos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="stylesglobal.css">
+    <style>
+        body{
+            background-color: #222;
+        }
+        .filter-section, .search-bar {
+            margin: 20px 0;
+        }
+        .game-card {
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .game-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .game-price {
+            font-size: 1.2rem;
+            color: #28a745;
+        }
+        .game-card .btn {
+            width: 100%;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.75);
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #fff;
+        }
+
+        h5{
+            color: #fff;
+        }
+      
+        /* Hover de redes sociales */
+        .social-icons i:hover {
+            color: #ddd;
+            transform: scale(1.2);
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        /* Hover para términos y condiciones */
+        .footer-links a:hover {
+            color: #ff9800;
+            text-decoration: underline;
+        }
+
+
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #ccc;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer .footer-links, footer .social-icons {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        footer .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        footer .social-icons i {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: white;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+
+            .hero-section .btn-hero {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .game-card img {
+                height: 150px;
+            }
+
+            footer .footer-links, footer .social-icons {
+                text-align: center;
+            }
+        }
+
+        .card-title{
+            color: #000;
+
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Videojuegos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="store.html">Tienda</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="cart.html">Carrito (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Barra de Búsqueda -->
+        <div class="row search-bar">
+            <div class="col-md-8">
+                <input type="text" class="form-control" id="searchInput" placeholder="Buscar juegos o complementos por nombre...">
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary btn-block" onclick="searchGames()">Buscar</button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="row filter-section">
+            <div class="col-md-4">
+                <h5>Filtrar por Género</h5>
+                <select class="form-control" id="genreFilter" onchange="filterGames()">
+                    <option value="">Todos</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Deportes">Deportes</option>
+                    <option value="Carreras">Carreras</option>
+                    <option value="Complemento">Complementos</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <h5>Filtrar por Precio</h5>
+                <select class="form-control" id="priceFilter" onchange="filterGames()">
+                    <option value="">Todos</option>
+                    <option value="low">Menos de $20</option>
+                    <option value="mid">$20 - $50</option>
+                    <option value="high">Más de $50</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <h5>Filtrar por Popularidad</h5>
+                <select class="form-control" id="popularityFilter" onchange="filterGames()">
+                    <option value="">Todos</option>
+                    <option value="top">Más populares</option>
+                    <option value="new">Nuevos lanzamientos</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Lista de Juegos y Complementos -->
+        <div class="row" id="game-list">
+            <!-- Juegos -->
+            <div class="col-md-4 game-card" data-genre="Acción" data-price="high" data-popularity="top">
+                <div class="card">
+                    <img src="images/cyberpunk.jpeg" class="card-img-top" alt="Cyberpunk 2077">
+                    <div class="card-body">
+                        <h5 class="card-title">Cyberpunk 2077</h5>
+                        <p class="card-text">Un mundo de ciencia ficción lleno de acción.</p>
+                        <p class="game-price">$59.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Cyberpunk 2077', 59.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Aventura" data-price="mid" data-popularity="new">
+                <div class="card">
+                    <img src="images/zelda.jpg" class="card-img-top" alt="Zelda: Breath of the Wild">
+                    <div class="card-body">
+                        <h5 class="card-title">The Legend of Zelda: Breath of the Wild</h5>
+                        <p class="card-text">Explora un vasto mundo lleno de aventuras.</p>
+                        <p class="game-price">$49.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Zelda: Breath of the Wild', 49.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="RPG" data-price="low" data-popularity="top">
+                <div class="card">
+                    <img src="images/final.jpg" class="card-img-top" alt="Final Fantasy XIV">
+                    <div class="card-body">
+                        <h5 class="card-title">Final Fantasy XIV</h5>
+                        <p class="card-text">Un MMORPG épico.</p>
+                        <p class="game-price">$19.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Final Fantasy XIV', 19.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Acción" data-price="high" data-popularity="top">
+                <div class="card">
+                    <img src="images/gta.jpg" class="card-img-top" alt="GTA V">
+                    <div class="card-body">
+                        <h5 class="card-title">Grand Theft Auto V</h5>
+                        <p class="card-text">La aclamada serie de acción y aventura.</p>
+                        <p class="game-price">$49.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('GTA V', 49.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Deportes" data-price="mid" data-popularity="new">
+                <div class="card">
+                    <img src="images/fifa22.jpeg" class="card-img-top" alt="FIFA 22">
+                    <div class="card-body">
+                        <h5 class="card-title">FIFA 22</h5>
+                        <p class="card-text">Juega al mejor fútbol con tus amigos.</p>
+                        <p class="game-price">$39.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('FIFA 22', 39.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Aventura" data-price="low" data-popularity="top">
+                <div class="card">
+                    <img src="images/rred.jpg" class="card-img-top" alt="Red Dead Redemption 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Red Dead Redemption 2</h5>
+                        <p class="card-text">Una historia épica en el viejo oeste.</p>
+                        <p class="game-price">$29.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Red Dead Redemption 2', 29.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="RPG" data-price="high" data-popularity="new">
+                <div class="card">
+                    <img src="images/elden.jpg" class="card-img-top" alt="Elden Ring">
+                    <div class="card-body">
+                        <h5 class="card-title">Elden Ring</h5>
+                        <p class="card-text">Un RPG de acción de mundo abierto.</p>
+                        <p class="game-price">$59.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Elden Ring', 59.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Carreras" data-price="mid" data-popularity="top">
+                <div class="card">
+                    <img src="images/forza.jpg" class="card-img-top" alt="Forza Horizon 5">
+                    <div class="card-body">
+                        <h5 class="card-title">Forza Horizon 5</h5>
+                        <p class="card-text">Una experiencia de carreras sin igual.</p>
+                        <p class="game-price">$39.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Forza Horizon 5', 39.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Acción" data-price="low" data-popularity="new">
+                <div class="card">
+                    <img src="images/assassin.jpg" class="card-img-top" alt="Assassin's Creed Valhalla">
+                    <div class="card-body">
+                        <h5 class="card-title">Assassin's Creed Valhalla</h5>
+                        <p class="card-text">Una historia épica de vikingos.</p>
+                        <p class="game-price">$29.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Assassin\'s Creed Valhalla', 29.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complementos -->
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="low" data-popularity="top">
+                <div class="card">
+                    <img src="images/skin.jpg" class="card-img-top" alt="Skins para Fortnite">
+                    <div class="card-body">
+                        <h5 class="card-title">Skins para Fortnite</h5>
+                        <p class="card-text">Mejora tu apariencia en el juego.</p>
+                        <p class="game-price">$9.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Skins para Fortnite', 9.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="mid" data-popularity="new">
+                <div class="card">
+                    <img src="images/pasecod.jpg" class="card-img-top" alt="Pase de Temporada">
+                    <div class="card-body">
+                        <h5 class="card-title">Pase de Temporada de Call of Duty</h5>
+                        <p class="card-text">Acceso a contenido exclusivo.</p>
+                        <p class="game-price">$24.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Pase de Temporada', 24.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="high" data-popularity="top">
+                <div class="card">
+                    <img src="images/sims.webp" class="card-img-top" alt="Expansión de The Sims 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Expansión de The Sims 4</h5>
+                        <p class="card-text">Añade nuevos mundos y características.</p>
+                        <p class="game-price">$39.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Expansión de The Sims 4', 39.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="mid" data-popularity="new">
+                <div class="card">
+                    <img src="images/fallout.jpg" class="card-img-top" alt="Paquete de DLC para Fallout 76">
+                    <div class="card-body">
+                        <h5 class="card-title">Paquete de DLC para Fallout 76</h5>
+                        <p class="card-text">Expande tu aventura en el Yermo.</p>
+                        <p class="game-price">$19.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Paquete de DLC para Fallout 76', 19.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="low" data-popularity="top">
+                <div class="card">
+                    <img src="images/apex.jpg" class="card-img-top" alt="Pase de Batalla de Apex Legends">
+                    <div class="card-body">
+                        <h5 class="card-title">Pase de Batalla de Apex Legends</h5>
+                        <p class="card-text">Desbloquea recompensas exclusivas.</p>
+                        <p class="game-price">$14.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Pase de Batalla de Apex Legends', 14.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="high" data-popularity="new">
+                <div class="card">
+                    <img src="images/odyssey.jpg" class="card-img-top" alt="Contenido Adicional de Assassin's Creed Odyssey">
+                    <div class="card-body">
+                        <h5 class="card-title">Contenido Adicional de Assassin's Creed Odyssey</h5>
+                        <p class="card-text">Expande tu historia con nuevas misiones.</p>
+                        <p class="game-price">$29.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Contenido Adicional de Assassin\'s Creed Odyssey', 29.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="mid" data-popularity="top">
+                <div class="card">
+                    <img src="images/rocket.jfif" class="card-img-top" alt="Paquete de Estilo para Rocket League">
+                    <div class="card-body">
+                        <h5 class="card-title">Paquete de Estilo para Rocket League</h5>
+                        <p class="card-text">Personaliza tu vehículo a tu manera.</p>
+                        <p class="game-price">$9.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Paquete de Estilo para Rocket League', 9.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="high" data-popularity="new">
+                <div class="card">
+                    <img src="images/justdance.jpg" class="card-img-top" alt="Pack de Música para Just Dance 2021">
+                    <div class="card-body">
+                        <h5 class="card-title">Pack de Música para Just Dance 2021</h5>
+                        <p class="card-text">Más canciones para disfrutar.</p>
+                        <p class="game-price">$19.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Pack de Música para Just Dance 2021', 19.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 game-card" data-genre="Complemento" data-price="mid" data-popularity="top">
+                <div class="card">
+                    <img src="images/sims4.jpg" class="card-img-top" alt="Paquete de Características para The Sims 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Paquete de Características para The Sims 4</h5>
+                        <p class="card-text">Nuevas características y objetos.</p>
+                        <p class="game-price">$14.99</p>
+                        <button class="btn btn-primary" onclick="addToCart('Paquete de Características para The Sims 4', 14.99)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#" data-toggle="modal" data-target="#termsModal">Términos y condiciones</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2024 Tienda de Videojuegos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal para Términos y Condiciones -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Términos y Condiciones</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bienvenido a nuestra tienda de videojuegos. Estos términos y condiciones describen las reglas y regulaciones para el uso de nuestro sitio web.</p>
+                    <p><strong>1. Generalidades</strong><br>
+                    Al acceder a este sitio web, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguna parte de los términos, no continúes utilizando este sitio web.</p>
+                    <p><strong>2. Compras y Pagos</strong><br>
+                    Todos los productos que ofrecemos están sujetos a disponibilidad. Nos reservamos el derecho de rechazar o cancelar cualquier pedido por cualquier motivo.</p>
+                    <p><strong>3. Suscripciones</strong><br>
+                    Las suscripciones mensuales serán renovadas automáticamente a menos que se cancele con antelación. Los precios están sujetos a cambios sin previo aviso.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Inicializa el carrito desde localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartCount = document.getElementById('cart-count');
+
+        function addToCart(gameName, price) {
+            const game = { name: gameName, price: price, description: `Descripción de ${gameName}`, image: 'path/to/image.jpg' };
+
+            cart.push(game);
+            localStorage.setItem('cart', JSON.stringify(cart)); // Guarda el carrito en localStorage
+            alert(`${gameName} ha sido agregado al carrito por $${price}.`);
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            cartCount.textContent = cart.length;
+        }
+
+        // Llama a la función de actualización del contador al cargar la página
+        updateCartCount();
+
+        function searchGames() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const gameCards = document.querySelectorAll('.game-card');
+
+            gameCards.forEach(card => {
+                const title = card.querySelector('.card-title').innerText.toLowerCase();
+                card.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function filterGames() {
+            const genre = document.getElementById('genreFilter').value;
+            const price = document.getElementById('priceFilter').value;
+            const popularity = document.getElementById('popularityFilter').value;
+            const gameCards = document.querySelectorAll('.game-card');
+
+            gameCards.forEach(card => {
+                const cardGenre = card.getAttribute('data-genre');
+                const cardPrice = card.getAttribute('data-price');
+                const cardPopularity = card.getAttribute('data-popularity');
+
+                const genreMatch = genre === "" || cardGenre === genre;
+                const priceMatch = price === "" || (price === "low" && cardPrice === "low") || (price === "mid" && cardPrice === "mid") || (price === "high" && cardPrice === "high");
+                const popularityMatch = popularity === "" || (popularity === "top" && cardPopularity === "top") || (popularity === "new" && cardPopularity === "new");
+
+                card.style.display = genreMatch && priceMatch && popularityMatch ? 'block' : 'none';
+            });
+        }
+
+        
+    </script>
+</body>
+</html>

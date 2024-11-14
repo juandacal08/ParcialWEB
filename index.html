@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="stylesglobal.css">
+    <title>Inicio - Tienda de Videojuegos</title>
+    <style>
+        /* Estilo Hero Section */
+        .hero-section {
+            background-image: url('images/heroe.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        .hero-section .btn-hero {
+            margin-top: 30px;
+            padding: 15px 20px ;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #3d224dbb;
+        }
+        .hero-section .btn.btn-hero:hover {
+    background-color: #3d224d; /* Cambia el color cuando el botón es hover (opcional) */
+}
+
+        /* Estilo para las tarjetas */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+         /* Hover de redes sociales */
+         .social-icons i:hover {
+            color: #ddd;
+            transform: scale(1.2);
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        /* Hover para términos y condiciones */
+        .footer-links a:hover {
+            color: #ff9800;
+            text-decoration: underline;
+        }
+
+        /* Estilo general */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #ccc;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer .footer-links, footer .social-icons {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        footer .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        footer .social-icons i {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: white;
+        }
+
+        /* Ajustes de secciones */
+        section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+
+            .hero-section .btn-hero {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .card img {
+                height: 150px;
+            }
+
+            footer .footer-links, footer .social-icons {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Navegación -->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Videojuegos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="store.html">Tienda</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="cart.html">Carrito (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Descubre los Mejores Juegos</h1>
+        <p>Las mejores ofertas y lanzamientos, todo en un solo lugar</p>
+        <a href="store.html" class="btn btn-hero" >Explorar Tienda</a>
+    </section>
+
+    <div class="container mt-5">
+        <div class="container mt-5">
+            <!-- Juegos Recomendados -->
+            <section id="featured-games">
+                <h2 class="section-title">Juegos Recomendados</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/halo.jpeg" class="card-img-top" alt="Juego 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Halo Infinite</h5>
+                                <p class="card-text">El legendario regreso del Master Chief con nuevas aventuras y modos multijugador.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/forza.jpg" class="card-img-top" alt="Juego 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Forza Horizon 5</h5>
+                                <p class="card-text">Conduce a través de paisajes exóticos con la mejor experiencia de carreras de mundo abierto.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/fifa.jpeg" class="card-img-top" alt="Juego 3">
+                            <div class="card-body">
+                                <h5 class="card-title">FIFA 24</h5>
+                                <p class="card-text">Vive la emoción del fútbol con gráficos mejorados y nuevas dinámicas de juego.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Ofertas Destacadas -->
+            <section id="special-offers" class="mt-5">
+                <h2 class="section-title">Ofertas Destacadas</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/assassin.jpg" class="card-img-top" alt="Oferta 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Assassin's Creed Valhalla</h5>
+                                <p class="card-text">Explora el mundo vikingo y conquista territorios con un 40% de descuento.</p>
+                                <p class="game-price">$22.99</p>
+                                <button class="btn btn-success" onclick="addToCart('Assassin Creed Valhalla', 22.99)">Comprar Ahora</button>                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/cyberpunk.jpeg" class="card-img-top" alt="Oferta 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Cyberpunk 2077</h5>
+                                <p class="card-text">Sumérgete en un mundo futurista por un precio especial.</p>
+                                <p class="game-price">$19.99</p>
+                                <button class="btn btn-success" onclick="addToCart('Cyberpunk 2077', 19.99)">Comprar Ahora</button>                           
+                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/gear.jfif" class="card-img-top" alt="Oferta 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Gears 5</h5>
+                                <p class="card-text">Lucha en épicas batallas con un 50% de descuento por tiempo limitado.</p>
+                                <p class="game-price">$14.99</p>
+                                <button class="btn btn-success" onclick="addToCart('Gears 5', 14.99)">Comprar Ahora</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Nuevos Lanzamientos -->
+            <section id="new-releases" class="mt-5">
+                <h2 class="section-title">Nuevos Lanzamientos</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/starfield.jpg" class="card-img-top" alt="Lanzamiento 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Starfield</h5>
+                                <p class="card-text">Explora el vasto espacio con esta épica aventura de ciencia ficción.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/elden.jpg" class="card-img-top" alt="Lanzamiento 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Elden Ring</h5>
+                                <p class="card-text">Aventura en un vasto mundo abierto lleno de misterios y desafíos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/howarts.webp" class="card-img-top" alt="Lanzamiento 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Hogwarts Legacy</h5>
+                                <p class="card-text">Vive la magia y explora el mundo de Harry Potter como nunca antes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- Lo Más Vendido -->
+            <section id="best-sellers" class="mt-5">
+                <h2 class="section-title">Lo Más Vendido</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/minecraft.jpg" class="card-img-top" alt="Más vendido 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Minecraft</h5>
+                                <p class="card-text">El popular juego de construcción y exploración sigue siendo un éxito de ventas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/warzone.jpg" class="card-img-top" alt="Más vendido 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Call of Duty: Warzone</h5>
+                                <p class="card-text">Uno de los battle royales más jugados con millones de jugadores en todo el mundo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/the-witcher-3.jpg" class="card-img-top" alt="Más vendido 3">
+                            <div class="card-body">
+                                <h5 class="card-title">The Witcher 3</h5>
+                                <p class="card-text">Aclamado por la crítica y amado por los jugadores, sigue siendo un imprescindible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#" data-toggle="modal" data-target="#termsModal">Términos y condiciones</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2024 Tienda de Videojuegos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal para Términos y Condiciones -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Términos y Condiciones</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bienvenido a nuestra tienda de videojuegos. Estos términos y condiciones describen las reglas y regulaciones para el uso de nuestro sitio web.</p>
+                    <p><strong>1. Generalidades</strong><br>
+                    Al acceder a este sitio web, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguna parte de los términos, no continúes utilizando este sitio web.</p>
+                    <p><strong>2. Compras y Pagos</strong><br>
+                    Todos los productos que ofrecemos están sujetos a disponibilidad. Nos reservamos el derecho de rechazar o cancelar cualquier pedido por cualquier motivo.</p>
+                    <p><strong>3. Suscripciones</strong><br>
+                    Las suscripciones mensuales serán renovadas automáticamente a menos que se cancele con antelación. Los precios están sujetos a cambios sin previo aviso.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Inicializa el carrito desde localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartCount = document.getElementById('cart-count');
+
+        function addToCart(gameName, price) {
+            const game = { name: gameName, price: price, description: `Descripción de ${gameName}`, image: 'path/to/image.jpg' };
+
+            cart.push(game);
+            localStorage.setItem('cart', JSON.stringify(cart)); // Guarda el carrito en localStorage
+            alert(`${gameName} ha sido agregado al carrito por $${price}.`);
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            cartCount.textContent = cart.length;
+        }
+
+        // Llama a la función de actualización del contador al cargar la página
+        updateCartCount();
+
+    </script>
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
